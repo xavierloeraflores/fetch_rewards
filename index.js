@@ -9,7 +9,7 @@ const router = require('./routes')
 
 server.use(morgan('dev'));
 server.use(bodyParser.json());
-server.use('/api', router)
+server.use('/points', router)
 
 
 server.listen(PORT, async () => {
