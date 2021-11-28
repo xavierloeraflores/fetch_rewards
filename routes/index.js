@@ -1,5 +1,6 @@
 const router = require('express').Router()
 
+const {getBalances} = require('../db')
 
 
 
@@ -43,7 +44,9 @@ router.post('/spend', (req, res, next) =>{
 })
 
 router.get('/balances', (req, res, next) =>{
+    const balances = getBalances()
     res.send({ 
+        balances, 
         message:"GET:/balances"
     })
 })
