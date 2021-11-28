@@ -1,6 +1,10 @@
 const router = require('express').Router()
 
-const {getBalances} = require('../db')
+const {
+    getBalances,
+    addTransaction,
+    getTransactions
+} = require('../db')
 
 
 
@@ -23,7 +27,10 @@ router.post('/transactions', (req, res, next) =>{
             message:'Bad Request: Missing required parameters'
         })
     }else{
+        addTransaction({payer, points, timestamp})
+        const transactions = getTransactions()
         res.send({ 
+            transactions,
             message:"POST:/transactions"
         })
     }
