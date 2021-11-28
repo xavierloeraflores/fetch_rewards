@@ -15,15 +15,31 @@ router.get('/', (req,res,next)=>{
 
 
 router.post('/transactions', (req, res, next) =>{
-    res.send({ 
-        message:"POST:/transactions"
-    })
+    const {payer, points, timestamp} = req.body
+    if(!payer || !points || !timestamp){
+        res.status(400)
+        res.send({
+            message:'Bad Request: Missing required parameters'
+        })
+    }else{
+        res.send({ 
+            message:"POST:/transactions"
+        })
+    }
 })
 
 router.post('/spend', (req, res, next) =>{
-    res.send({ 
-        message:"POST:/spend"
-    })
+    const { points} = req.body
+    if(!points ){
+        res.status(400)
+        res.send({
+            message:'Bad Request: Missing required parameters'
+        })
+    }else{
+        res.send({ 
+            message:"POST:/spend"
+        })
+    }
 })
 
 router.get('/balances', (req, res, next) =>{
@@ -40,8 +56,6 @@ router.get('/balances', (req, res, next) =>{
 
 router.use((error, req, res, next)=>{
     console.error(error)
-    res.status(500)
-    res.send(error)
 })
 
 
