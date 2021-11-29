@@ -27,6 +27,14 @@ router.post('/transactions', (req, res, next) =>{
         res.send({
             message:'Bad Request: Missing required parameters'
         })
+    }else if(!Number.isInteger(points)){
+        res.send({
+            message:'You must provide an integer point value'
+        })
+    }else if(!(typeof payer ==='string' && typeof timestamp==='string' )){
+        res.send({
+            message:'You must provide an string value for the payer & timestamp'
+        })
     }else{
         addTransaction({payer, points, timestamp})
         const transactions = getTransactions()
@@ -44,6 +52,10 @@ router.post('/spend', (req, res, next) =>{
     }else if(points<=0){
         res.send({
             message:'You must provide a point value greater than 0'
+        })
+    }else if(!Number.isInteger(points)){
+        res.send({
+            message:'You must provide an integer point value'
         })
     }else{
         const spentPoints = spendPoints(points)
