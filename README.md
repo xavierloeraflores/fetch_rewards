@@ -14,12 +14,12 @@ To change this, you can change the the Port number on line 1 of the root index.j
 ## Endpoints
 
 ### GET
-Test Server [/points](#get-points) <br/>
-Get Balances [/points/balances](#get-pointsbalances) <br/>
+`Test Server` [/points](#get-points) <br/>
+`Get Balances` [/points/balances](#get-pointsbalances) <br/>
 
 ### POST
-Add Transaction [/points/transactions](#post-pointstransactions) <br/>
-Spend Points [/points/spend](#post-pointsspend) <br/>
+`Add Transaction` [/points/transactions](#post-pointstransactions) <br/>
+`Spend Points` [/points/spend](#post-pointsspend) <br/>
 
 ### GET /points
 
