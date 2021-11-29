@@ -34,7 +34,7 @@ Use this to test the server to see if it is running. If the server is running, y
 
 ### GET /points/balances
 
-Gets balances for all users
+This will return the total point balances for each user that has made a transaction. 
 
 **Response**
 ```
@@ -47,7 +47,7 @@ Gets balances for all users
 
 ### POST /points/transaction
 
-Creates a new transaction
+This will create a new transaction and change the balances for the payer. This will return a response with all the transactions. 
 
 **Request**
 ```
@@ -60,23 +60,58 @@ Creates a new transaction
 
 **Response**
 ```
-
+[
+  {
+    "payer": "DANNON",
+    "points": 1000,
+    "timestamp": "2020-11-02T14:00:00Z"
+  },
+  {
+    "payer": "UNILEVER",
+    "points": 200,
+    "timestamp": "2020-10-31T11:00:00Z"
+  },
+  {
+    "payer": "DANNON",
+    "points": -200,
+    "timestamp": "2020-10-31T15:00:00Z"
+  }
+]
 ```
 
 ### POST /points/spend
 
-Spends points from the transactions
+This will spend a designated amount of points by spending the points from the earliest transactions in the system. If the amount of points requested is larger than what is available, then the points wont be spent and a message will be recieved. Otherwise, the points will be spent and the response will show with users's points were spent. 
 
 **Request**
 ```
 {
-	"points":5000
+  "points":5000
 }
 ```
 
 **Response**
 ```
+[
+  {
+    "payer": "DANNON",
+    "points": -100
+  },
+  {
+    "payer": "UNILEVER",
+    "points": -200
+  },
+  {
+    "payer": "MILLER COORS",
+    "points": -4700
+  }
+]
+```
 
+```
+{
+  "message": "Not enough points to spend"
+}
 ```
 
 
