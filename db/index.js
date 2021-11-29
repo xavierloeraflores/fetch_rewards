@@ -79,7 +79,10 @@ const spendPoints = (points) => {
             spentTotals[transaction.payer]=-_spentPoints
         }
     }
-    return Object.entries(spentTotals)
+    const result = Object.entries(spentTotals).map((entry)=>{
+        return {payer:entry[0], points:entry[1]}
+    })
+    return result
 }
 
 
