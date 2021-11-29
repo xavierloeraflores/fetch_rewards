@@ -9,6 +9,7 @@ const getBalances = () => {
 const addTransaction = (transaction) => {
     transactions.push(transaction)
     insertUnspentPoints(transaction)
+    updateBalances(transaction)
     console.log({transactions,unspentPoints})
     return {transactions,unspentPoints}
 }
@@ -31,6 +32,16 @@ const insertUnspentPoints = (transaction) =>{
 
 const getUnspentPoints = () =>{
     return unspentPoints
+}
+
+const updateBalances = (transaction) => {
+    const {payer, points} = transaction
+    if (Object.keys(balances).includes(payer)){
+        balances[payer]+=points
+    }else{
+        balances[payer]=points
+    }
+    return balances
 }
 
 
