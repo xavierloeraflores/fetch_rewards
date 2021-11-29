@@ -41,6 +41,10 @@ router.post('/spend', (req, res, next) =>{
         res.send({
             message:'Bad Request: Missing required parameters'
         })
+    }else if(points<=0){
+        res.send({
+            message:'You must provide a point value greater than 0'
+        })
     }else{
         const spentPoints = spendPoints(points)
         if (spentPoints.length==0){
