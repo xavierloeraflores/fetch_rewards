@@ -6,6 +6,14 @@ const getBalances = () => {
     return balances
 }
 
+const getTransactions = () => {
+    return transactions
+}
+
+const getUnspentPoints = () =>{
+    return unspentPoints
+}
+
 const addTransaction = (transaction) => {
     transactions.push(transaction)
     insertUnspentPoints(transaction)
@@ -14,9 +22,6 @@ const addTransaction = (transaction) => {
     return {transactions,unspentPoints}
 }
 
-const getTransactions = () => {
-    return transactions
-}
 
 const insertUnspentPoints = (transaction) =>{
     unspentPoints.push(transaction)
@@ -30,9 +35,6 @@ const insertUnspentPoints = (transaction) =>{
     return unspentPoints
 }
 
-const getUnspentPoints = () =>{
-    return unspentPoints
-}
 
 const updateBalances = (transaction) => {
     const {payer, points} = transaction
