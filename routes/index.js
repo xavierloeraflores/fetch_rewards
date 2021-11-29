@@ -29,10 +29,7 @@ router.post('/transactions', (req, res, next) =>{
     }else{
         addTransaction({payer, points, timestamp})
         const transactions = getTransactions()
-        res.send({ 
-            transactions,
-            message:"POST:/transactions"
-        })
+        res.send( transactions)
     }
 })
 
@@ -45,24 +42,20 @@ router.post('/spend', (req, res, next) =>{
         })
     }else{
         const spentPoints = spendPoints(points)
-        res.send({
-            spentPoints, 
-            message:"POST:/spend"
-        })
+        if (spentPoints.length==0){
+            res.send({
+                message:'Not enough points to spend', 
+            })
+        }else{
+            res.send(spentPoints)
+        }
     }
 })
 
 router.get('/balances', (req, res, next) =>{
     const balances = getBalances()
-    res.send({ 
-        balances, 
-        message:"GET:/balances"
-    })
+    res.send(balances)
 })
-
-
-
-
 
 
 
