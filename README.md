@@ -47,7 +47,14 @@ This will return the total point balances for each user that has made a transact
 
 ### POST /points/transaction
 
-This will create a new transaction and change the balances for the payer. This will return a response with all the transactions. 
+This will create a new transaction and change the balances for the payer. Afterwards, a response with all the transactions will be sent. New users will also be added to the balance sheet. 
+
+**Required Body Parameters**
+| Name | Type | Description |
+| -------------:|:-------:| ------------------------------ |
+| `payer` | string  | The username of the user who is making the transaction |
+| `points` | integer  | The amounts of points being paid. (Can be positive or negative) |
+| `timestamp` | string  | The timestamp for when the transaction was completed | 
 
 **Request**
 ```
@@ -82,6 +89,11 @@ This will create a new transaction and change the balances for the payer. This w
 ### POST /points/spend
 
 This will spend a designated amount of points by spending the points from the earliest transactions in the system. If the amount of points requested is larger than what is available, then the points wont be spent and a message will be recieved. Otherwise, the points will be spent and the response will show with users's points were spent. 
+
+**Required Body Parameters**
+| Name | Type | Description |
+| -------------:|:-------:| ------------------------------ |
+| `points` | integer  | The amounts of points that are going to be spent. (Must be positive)|
 
 **Request**
 ```
