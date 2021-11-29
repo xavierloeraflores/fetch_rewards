@@ -72,7 +72,7 @@ const spendPoints = (points) => {
 
         points -= transactionPoints
         updateBalances({payer:transaction.payer,points:-_spentPoints})
-        
+
         if (Object.keys(spentTotals).includes(transaction.payer)){
             spentTotals[transaction.payer]-=_spentPoints
         }else{
@@ -85,9 +85,8 @@ const spendPoints = (points) => {
 
 
 module.exports = {
-    getBalances, 
-    addTransaction, 
-    getTransactions,
-    getUnspentPoints, 
+    getBalances,
+    addTransaction,
+    getTransactions, 
     spendPoints
 }

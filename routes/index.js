@@ -3,7 +3,8 @@ const router = require('express').Router()
 const {
     getBalances,
     addTransaction,
-    getTransactions, spendPoints
+    getTransactions, 
+    spendPoints
 } = require('../db')
 
 
