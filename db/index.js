@@ -26,7 +26,6 @@ const addTransaction = (transaction) => {
     transactions.push(transaction)
     insertUnspentPoints(transaction)
     updateBalances(transaction)
-    console.log({transactions,unspentPoints})
     return {transactions,unspentPoints}
 }
 
@@ -58,7 +57,7 @@ const spendPoints = (points) => {
     if (points>getTotalUnspentPoints()){
         return []
     }
-    const spentPoints = []
+    const spentTotals = {}
     while (points>0){
         const transaction = unspentPoints.shift()
         let transactionPoints = transaction.points
@@ -73,9 +72,14 @@ const spendPoints = (points) => {
 
         points -= transactionPoints
         updateBalances({payer:transaction.payer,points:-_spentPoints})
-        spentPoints.push({payer:transaction.payer,points:-_spentPoints })
+        
+        if (Object.keys(spentTotals).includes(transaction.payer)){
+            spentTotals[transaction.payer]-=_spentPoints
+        }else{
+            spentTotals[transaction.payer]=-_spentPoints
+        }
     }
-    return spentPoints
+    return Object.entries(spentTotals)
 }
 
 
