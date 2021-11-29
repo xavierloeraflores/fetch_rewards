@@ -3,7 +3,7 @@ const router = require('express').Router()
 const {
     getBalances,
     addTransaction,
-    getTransactions
+    getTransactions, spendPoints
 } = require('../db')
 
 
@@ -44,7 +44,9 @@ router.post('/spend', (req, res, next) =>{
             message:'Bad Request: Missing required parameters'
         })
     }else{
-        res.send({ 
+        const spentPoints = spendPoints(points)
+        res.send({
+            spentPoints, 
             message:"POST:/spend"
         })
     }

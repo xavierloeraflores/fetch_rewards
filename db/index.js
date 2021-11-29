@@ -14,6 +14,14 @@ const getUnspentPoints = () =>{
     return unspentPoints
 }
 
+const getTotalUnspentPoints = () => {
+    let totalPoints = 0
+    unspentPoints.forEach((transaction)=>{
+        totalPoints += transaction.points
+    })
+    return totalPoints
+}
+
 const addTransaction = (transaction) => {
     transactions.push(transaction)
     insertUnspentPoints(transaction)
@@ -46,6 +54,29 @@ const updateBalances = (transaction) => {
     return balances
 }
 
+const spendPoints = (points) => {
+    if (points>getTotalUnspentPoints()){
+        return []
+    }
+    const spentPoints = []
+    while (points>0){
+        const transaction = unspentPoints.shift()
+        let transactionPoints = transaction.points
+        let _spentPoints = transactionPoints
+        
+        if(points<transaction.points){
+            transaction.points -= points
+            addTransaction(transaction)
+            updateBalances({payer:transaction.payer,points:-transaction.points})
+            _spentPoints = points
+        }
+
+        points -= transactionPoints
+        updateBalances({payer:transaction.payer,points:-_spentPoints})
+        spentPoints.push({payer:transaction.payer,points:-_spentPoints })
+    }
+    return spentPoints
+}
 
 
 
@@ -53,5 +84,6 @@ module.exports = {
     getBalances, 
     addTransaction, 
     getTransactions,
-    getUnspentPoints
+    getUnspentPoints, 
+    spendPoints
 }
