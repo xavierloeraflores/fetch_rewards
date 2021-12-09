@@ -1,4 +1,7 @@
 # fetch_rewards
+Fetch Rewards take home project
+
+[Prompt](https://fetch-hiring.s3.us-east-1.amazonaws.com/points.pdf) <br/>
 
 ## Set Up
 
@@ -45,7 +48,7 @@ This will return the total point balances for each user that has made a transact
 }
 ```
 
-### POST /points/transaction
+### POST /points/transactions
 
 This will create a new transaction and change the balances for the payer. Afterwards, a response with all the transactions will be sent. New users will also be added to the balance sheet. 
 
